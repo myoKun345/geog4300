@@ -86,20 +86,22 @@ table(census_data_se$St_name)
 census_data_elites<-census_data %>%
   filter(Region=="NE" & BADeg_pct > 25)
 
-#Counties in the Southeast or Northeast with high poverty rates:
+#Counties in the Southeast or Northeast with high education rates:
 census_data_elites1<-census_data %>%
-  filter(Region=="NE" | Region=="SE") %>%
+  filter(Region %in% c("NE", "SE")) %>%
   filter(BADeg_pct > 25)
 table(census_data_elites1$St_name)
 
 #You try it!!
 ##Filter all counties with a poverty rate (pov_pop_pct) > 20% (BADeg_pct)
 #Call this census_data_pov
+census_data_hipov <- census_data %>%
+  filter(pov_pop_pct > 20)
 
 #Build a tally of high poverty counties by state 
 #We're using base R to create and plot this table. 
-table(census_data_pov$St_name)
-state_pov<-data.frame(table(census_data_pov$St_name))
+table(census_data_hipov$St_name)
+state_pov<-data.frame(table(census_data_hipov$St_name))
 
 #The "select" command allows you to reduce the number of variables
 #You can select by column names or numbers
@@ -115,7 +117,7 @@ census_data_pov<-census_data %>%
 
 #Lastly, you can use mutate to create new variables
 census_data<-census_data %>%
-  mutate(LessBA_pct=HSGrad_pct+SomeCol_pct)
+  mutate(LessBA_pct=LessHS_pct + HSGrad_pct + SomeCol_pct)
 hist(census_data$LessBA_pct)
 boxplot(census_data$LessBA_pct)
 
@@ -125,3 +127,9 @@ boxplot(census_data$LessBA_pct)
 # *Filter the dataset to look at only songs in A major (key_mode)
 # *Create a histogram for the danceability variable
 # *Create a new variable using mutate that sums danceability, energy, and loudness.
+rem <- read_csv("data/rem_songs.csv")
+
+Amaj <- rem %>% filter(key == "A" & mode == "major")
+hist(rem$danceability)
+ggplot(rem, aes(x=danceability)) + geom_histogram()
+rem_q <- rem %>% mutate(quality = danceability + energy + loudness)

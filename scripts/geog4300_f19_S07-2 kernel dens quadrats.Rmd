@@ -18,7 +18,7 @@ library(spatstat)
 We will continue work with tornado data for this anlaysis.
 
 ```{r}
-tornado_points<-read_csv("https://github.com/jshannon75/geog4300/raw/master/data/tornado_points.csv")
+tornado_points<-read_csv("data/tornado_points.csv")
 ```
 
 Quadrat analysis in R often uses a package called spatstat. A lot of info on spatstat is available here: https://research.csiro.au/software/wp-content/uploads/sites/6/2015/02/Rspatialcourse_CMIS_PDF-Standard.pdf. With spatstat, you can create square quadrants of varying sizes
@@ -63,7 +63,7 @@ plot(density(tornado_ppp,1))
 Spatstat can also create a contour map. The lines indicate the value of the kernel density map.
 
 ```{r}
-contour(density(tornado_ppp))
+contour(density(tornado_ppp,0.25))
 ```
 
 Spatstat can create a quadrat map with square cells. The two numbers are the count of columns and rows.
@@ -76,7 +76,7 @@ plot(quadratcount(tornado_ppp,6,3))
 
 You can combine these maps with the add=TRUE parameter.
 ```{r}
-kernel_map<-density(tornado_ppp,0.5)
+kernel_map<-density(tornado_ppp,0.25)
 quad_map<-quadratcount(tornado_ppp,15,10)
 
 plot(kernel_map)

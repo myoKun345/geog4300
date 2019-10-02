@@ -22,7 +22,7 @@ library(viridis)
 First, let's load our spatial tract data for Charlotte as a spatial file using st_read from the sf package. We'll select tracts that are in Mecklenberg County (fips of 37119).
 
 ```{r}
-charpop<-st_read("https://github.com/jshannon75/geog4300/raw/master/data/charlotte_tractpop.gpkg") %>%
+charpop<-st_read("data/charlotte_tractpop.gpkg") %>%
   mutate(cty_fips=substr(GEOID,1,5)) %>% #county fips code is the first five digits of the tract fips
   filter(cty_fips==37119) %>%
   st_transform(4326) 
