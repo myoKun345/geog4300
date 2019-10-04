@@ -76,4 +76,18 @@ visualize.pois(stat=19,lambda=21,section="upper")
 You try it!
 1) If the there are 12 rainy days in the average September in Athens, what's the chance of getting more than 15 rainy days this month?
 
+```{r}
+1-ppois(15, 12)
+```
+
 2) For the past 100 years, a stream close to Athens has been measured at a gauging station. A USGS scientist has crunched these numbers and determined that the results are normally distributed, with a mean of 35.26 CFM and a standard deviation of 4.61 CFM. Calculate the probabilities the stream flow in a given year will exceed 42 and 48 CFM.
+
+```{r}
+1 - pnorm(42, 35.26, 4.61)
+1 - pnorm(48, 35.26, 4.61)
+pnorm(42, 35.26, 4.61, F)
+
+qnorm(0.9, 1068, 195)
+
+hist(rnorm(100, 1068, 195))
+```
