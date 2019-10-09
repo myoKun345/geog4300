@@ -22,6 +22,15 @@ CI.upper<-mean+error
 
 **You try it!** Adjust the code above for a 90% confidence interval and a sample size of only 80.
 
+```{r}
+mean<-43
+se.2<-(6.2/sqrt(80))
+z.score.2<-qnorm(.95)
+error.2<-(se*z.score.2)
+CI.2.lower<-mean-error.2
+CI.2.upper<-mean+error.2
+```
+
 We can also visualize these confidence intervals. Let's load the microdata you are working within the current lab.
 
 ```{r}
