@@ -16,7 +16,7 @@ This script walks through the procedure for one sample tests in R. Let's start b
 
 ```{r}
 sample20<-as.tibble(rnorm(20, mean=24, sd=2))
-ggplot(sample20,aes(x=value))+geom_histogram()
+ggplot(sample20,aes(x=value))+geom_histogram(binwidth=0.5)
 ```
 
 Is this sample significantly different from a population mean of 25? In this case, "t.test" is the function you want.
@@ -28,7 +28,7 @@ t.test(sample20$value,mu=25)
 How are the results different with with an n > 30? 
 
 ```{r}
-sample50<-as.tibble(rnorm(50, mean=24, sd=3))
+sample50<-as.tibble(rnorm(50, mean=24, sd=2))
 t.test(sample50$value,mu=25)
 ```
 
@@ -40,8 +40,8 @@ t.test(sample50$value,mu=25,conf.level=.90)
 
 Run a one tailed t.test using ""alternative"
 ```{r}
-t.test(sample,mu=25,alternative="less") #Is the sample mean *less* than 25?
-t.test(sample,mu=25,alternative="greater") #Is the sample mean *greater* than 25?
+t.test(sample50$value,mu=25,alternative="less") #Is the sample mean *less* than 25?
+t.test(sample50$value,mu=25,alternative="greater") #Is the sample mean *greater* than 25?
 ```
 
 The prop.test function does a one sample test for proportions. What if you rolled your dice 100 times and came up with snake eyes 5 times? Are you abnormallly lucky? Do you have loaded dice? We now that the probability of snake eyes is .027. So let's test the probability of 5 rolls in 100.
@@ -56,7 +56,13 @@ prop.test(x=50, n=1000, p=.027)
 
 Let's look at the Daymet dataset from lab 1.
 ```{r}
-daymet_data<-read_csv("https://github.com/jshannon75/geog4300/raw/master/data/Daymet_Cty_Summary_2005_2015.csv")
+daymet_data<-read_csv("data/Daymet_Cty_Summary_2005_2015.csv")
 ```
 
 The average yearly high temperature in Clarke County (gisjn_cty code G13059) is 23.1 degrees Celsius. Filter these data to select just observations from 2013 in Athens. Was this year *significantly* higher or lower than average? The gisjn_cty id for Clarke County is G13059.
+
+```{r}
+daymet_ahn <- daymet_data %>% filter(gisjn_cty=="G13059" & year==2013)
+t.test(daymet_ahn$tmax, mu=23.1)
+```
+
