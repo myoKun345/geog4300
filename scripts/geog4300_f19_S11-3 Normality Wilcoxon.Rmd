@@ -26,7 +26,7 @@ hist(test2)
 qqnorm(test2) 
 ```
 
-Shapiro-Wilk test: the null hypothesis is that the data IS normal, so a low p value indicates that the dataset is skewed/not noraml.
+Shapiro-Wilk test: the null hypothesis is that the data ARE normal, so a low p value indicates that the dataset is skewed/not normal.
 ```{r}
 shapiro.test(test1) #skewed data
 shapiro.test(test2) #normal data
@@ -43,10 +43,13 @@ qqnorm(test2); qqline(test2)
 Go back to our census data (ACSCtyData_2014_ACS). 
 ```{r}
 acsdata<-read_csv("data/ACSCtyData_2014ACS.csv")
+<<<<<<< HEAD
 
 qqnorm(acsdata$SomeCol_pct); qqline(acsdata$SomeCol_pct)
 hist(acsdata$SomeCol_pct)
 shapiro.test(acsdata$SomeCol_pct)
+=======
+>>>>>>> a09df36e98d5ccb037a92821af7fc0f7216723d1
 ```
 What's the most normal variable you can find?
 
@@ -74,10 +77,13 @@ Let's look at a sample dataset of pollen reading for major tree species at sever
 
 ```{r}
 pollen_data<-read_csv("data/Midwest_Pollen_Data.csv")
+<<<<<<< HEAD
 
 shapiro.test(pollen_data$Juniper)
 shapiro.test(pollen_data$Quercus)
 
 wilcox.test(pollen_data$Juniper, pollen_data$Quercus, paired=T)
+=======
+>>>>>>> a09df36e98d5ccb037a92821af7fc0f7216723d1
 ```
-Pick two species and compare their pollen levels using the appropriate t-test.
+Pick two species and determine their normality. Compare their pollen levels using the appropriate t-test.
