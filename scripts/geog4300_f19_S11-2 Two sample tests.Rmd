@@ -93,6 +93,8 @@ t.test(stream.1990, stream.2010)
 ```{r}
 mon<-c(12.4, 13.9, 14.6, 11.3, 18.1, 15.2, 13.9)
 wed<-c(10.7, 11.1, 16.2, 12.5, 10.8, 16.7, 12.7)
+
+t.test(mon, wed, paired=T)
 ```
 
 Assume the data is normal. Is there a difference?
@@ -102,6 +104,8 @@ Assume the data is normal. Is there a difference?
 ```{r}
 prepolicy<-c(398,413,521,645,513,310)
 postpolicy<-c(375,403,410,552,406,308)
+
+t.test(prepolicy, postpolicy, paired=T)
 ```
 
 These levels are normally distributed at the state level. Did pollution go down?
